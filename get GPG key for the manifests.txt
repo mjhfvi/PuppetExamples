@@ -1,0 +1,2 @@
+get the GPG key from a machine you install the repo on
+run the "apt-key finger -k" command to get the key
