@@ -1,3 +1,4 @@
+class my_module::apt_hashicorp {
 apt::source { 'hashicorp_repository':
   comment  => 'Add Hashicorp official and GPG key',
   location => 'https://apt.releases.hashicorp.com',
@@ -10,4 +11,5 @@ apt::source { 'hashicorp_repository':
   include  => {
     'deb' => true,
   },
+}
 }

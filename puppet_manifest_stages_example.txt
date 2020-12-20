@@ -1,0 +1,93 @@
+node default {
+include my_module::new_temp02_file
+include my_module::new_temp03_file
+}
+
+node ops01 {
+
+}
+
+node ops02 {
+
+stage { 'before_main': before => Stage['main'], }
+stage { 'after_main': }
+Stage['main'] -> Stage['after_main']
+
+class { 'my_module::new_temp01_file': stage => 'before_main', }
+class { 'my_module::new_temp02_file': stage => 'before_main', }
+class { 'my_module::update': stage => 'before_main', }
+
+class { 'my_module::install_docker_ansible_packages': stage => 'after_main', }
+class { 'my_module::install_python_packages': stage => 'after_main', }
+class { 'my_module::install_hashicorp_packages': stage => 'after_main', }
+class { 'my_module::install_kubernetes_packages': stage => 'after_main', }
+
+
+include my_module::apt_hashicorp
+include my_module::apt_kubernetes
+include my_module::apt_docker
+include my_module::update
+}
+
+node ops03 {
+include my_module::new_temp01_file
+include my_module::apt_hashicorp
+include my_module::apt_kubernetes
+include my_module::apt_docker
+include my_module::install_hashicorp_packages
+include my_module::install_python_packages
+include my_module::install_ansible
+include my_module::install_docker
+include my_module::update 
+
+}
+
+node ops04 {
+stage { 'before_main': before => Stage['main'], }
+stage { 'after_main': }
+Stage['main'] -> Stage['after_main']
+
+class { 'my_module::new_temp01_file': stage => 'before_main', }
+class { 'my_module::new_temp02_file': stage => 'before_main', }
+class { 'my_module::update': stage => 'before_main', }
+
+class { 'my_module::install_docker_ansible_packages': stage => 'after_main', }
+class { 'my_module::install_python_packages': stage => 'after_main', }
+class { 'my_module::install_hashicorp_packages': stage => 'after_main', }
+class { 'my_module::install_kubernetes_packages': stage => 'after_main', }
+
+
+include my_module::apt_hashicorp
+include my_module::apt_kubernetes
+include my_module::apt_docker
+include my_module::update
+}
+
+
+
+
+####
+#include my_module::new_temp01_file
+#include my_module::new_temp02_file
+#include my_module::new_temp03_file
+#include my_module::wait
+
+#include my_module::apt_hashicorp
+#include my_module::apt_kubernetes
+#include my_module::apt_docker
+
+#include my_module::install_ansible
+#include my_module::install_kubernetes
+#include my_module::install_terraform
+#include my_module::install_docker
+
+#include my_module::install_python_packages
+#include my_module::install_kubernetes_packages
+#include my_module::install_hashicorp_packages
+#include my_module::install_docker_ansible_packages
+
+#include unattended_upgrades
+#include my_module::update 
+
+#include my_module::windows_new_temp01_file
+####

@@ -1,0 +1,13 @@
+node ops02 {
+  class{'my_module::install_python_packages':}
+  class{'my_module::install_kubernetes_packages':}
+  class{'my_module::install_hashicorp_packages':}
+
+  
+  Class['my_module::install_python_packages'] -> Class['my_module::install_kubernetes_packages']
+  Class['my_module::install_kubernetes_packages'] -> Class['my_module::install_hashicorp_packages']
+
+include my_module::apt_hashicorp
+include my_module::apt_kubernetes
+include my_module::apt_docker
+}
